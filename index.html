@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>AgroDrone Simulator 3D</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="loading">Carregando o simulador 3D…<small>Se a cena não aparecer, confira sua conexão com a internet.</small></div>
+<header>
+  <div class="brand">🚁 <span>AGRODRONE</span> <small>SIMULATOR</small></div>
+  <nav>
+    <button class="nav active" data-panel="inicio">⌂ INÍCIO</button>
+    <button class="nav" data-panel="mapa">▦ MAPA</button>
+    <button class="nav" data-panel="drones">✣ DRONES</button>
+    <button class="nav" data-panel="campos">▤ CAMPOS</button>
+    <button class="nav" data-panel="missoes">☷ MISSÕES</button>
+  </nav>
+  <div class="money">🟢 R$ <b id="money">125.000</b></div>
+</header>
+<main id="game">
+  <canvas id="scene"></canvas>
+  <div class="top-center"><div id="compass">N ▲ NE</div><div id="weather">☀️ 24°C · Vento 3 km/h</div></div>
+  <section class="panel map-panel">
+    <h3>MAPA DA PROPRIEDADE</h3>
+    <canvas id="minimap" width="300" height="210"></canvas>
+    <div class="field-list">
+      <button data-field="0" class="field-choice selected"><i class="c1"></i> 1 · Soja <span>25 ha</span></button>
+      <button data-field="1" class="field-choice"><i class="c2"></i> 2 · Milho <span>18 ha</span></button>
+      <button data-field="2" class="field-choice"><i class="c3"></i> 3 · Trigo <span>20 ha</span></button>
+      <button data-field="3" class="field-choice"><i class="c4"></i> 4 · Morango <span>12 ha</span></button>
+      <button data-field="4" class="field-choice"><i class="c5"></i> 5 · Pastagem <span>30 ha</span></button>
+    </div>
+  </section>
+  <section class="panel mission-panel">
+    <h3>MISSÃO ATUAL</h3>
+    <strong id="mission-title">🌿 Pulverizar Talhão 1 (Soja)</strong>
+    <p>Área total: <b id="area-total">25</b> ha</p>
+    <p>Área concluída: <b id="area-done">0,0</b> ha (<b id="progress-text">0</b>%)</p>
+    <p>Taxa de aplicação: <b>20 L/ha</b></p>
+    <div class="progress"><div id="progress-bar"></div></div>
+  </section>
+  <aside class="panel telemetry">
+    <div class="stat"><span>🔋 BATERIA</span><b id="battery">100%</b><div class="bar"><i id="battery-bar"></i></div></div>
+    <div class="stat"><span>💧 TANQUE</span><b id="tank">100%</b><div class="bar blue"><i id="tank-bar"></i></div><small id="liters">100 / 100 L</small></div>
+    <div class="stat"><span>↕ ALTITUDE</span><b><span id="altitude">4.0</span> m</b></div>
+    <div class="stat"><span>◉ VELOCIDADE</span><b><span id="speed">0</span> km/h</b></div>
+    <div class="stat"><span>▧ ÁREA APLICADA</span><b><span id="area-short">0,0</span> / <span id="area-short-total">25</span> ha</b></div>
+  </aside>
+  <div class="toast" id="toast">Simulador pronto!</div>
+  <div class="controls">
+    <div class="stick-wrap"><label>MOVER</label><div class="stick" id="move-stick"><div class="stick-knob"></div></div></div>
+    <div class="vertical-controls"><button id="up">⬆<small>SUBIR</small></button><button id="down">⬇<small>DESCER</small></button></div>
+    <div class="action-controls">
+      <button id="spray" class="action active">💦<small>PULVERIZAÇÃO</small><b>ON</b></button>
+      <button id="auto" class="action active">☷<small>FAIXAS AUTOMÁTICAS</small><b>ON</b></button>
+      <button id="precision" class="action">🎯<small>MODO PRECISÃO</small><b>OFF</b></button>
+    </div>
+    <div class="stick-wrap"><label>ALTITUDE / GIRO</label><div class="stick" id="height-stick"><div class="stick-knob"></div></div></div>
+  </div>
+  <div class="help">PC: WASD mover · ↑/↓ altitude · Espaço pulverizar · R recarregar tanque · Toque e arraste os joysticks no celular</div>
+</main>
+<div id="modal" class="modal hidden"><div class="modal-card"><button id="close-modal">✕</button><h2 id="modal-title"></h2><div id="modal-content"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
